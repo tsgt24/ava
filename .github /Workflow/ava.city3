@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Ava.City 2.0</title>
+</head>
+<body>
+    <input id="clickMe" type="button" value="Начать игру" onclick="start();"/>
+    <a style="display: none;" id="flash" href="https://get.adobe.com/flashplayer">Включить Flash</a>
+    <div id="flashContent"></div>
+    <br>
+    <a href="/logout">Выйти</a>
+    <br>
+    <a href="https://tele.click/avacity_2_0">Группа Telegram</a>
+    <script>
+        function start(){
+            document.getElementById('clickMe').style.display = "none";
+            if (swfobject.getFlashPlayerVersion().major == 0){
+                document.getElementById('flash').style.display = "block";
+                return;
+            }
+            var vars = {};
+            vars['config'] = '/appconfig.xml';
+            vars['versions'] = '/files/versions.json?15729515801';
+            vars['appSwf'] = '/files/pnz-city.swf?15729515801';
+            var flashVars = [];
+            for (var variable in vars) {
+                flashVars.push(variable + '=' + vars[variable]);
+            }
+            var params = {
+                flashvars: flashVars.join("&"),
+                allowfullscreen: "true",
+                allowscriptaccess: "always",
+                allowFullScreenInteractive: "true",
+                allownetworking: "all",
+                wmode: "transparent"
+            };
+            var el = document.getElementById("flashContent");
+            swfobject.embedSWF("/files/pnz-city-container.swf", el, 1280, 720, 10, null, null, params, {name: "flashContent"});
+        }
+    </script>
+    <script type="text/javascript" src="/files/swfobject.js"></script>
+</body>
+</html>
